@@ -1,7 +1,7 @@
 # 2566-CPE311-unicorn
-<h1>
+<h2>
   🔥Project Automatic_Fire_Gun🔥
-</h1>
+</h2>
 <p> 
 Development 🚀
 </p>
