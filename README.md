@@ -8,3 +8,7 @@
 </h2>
 
 [![Methodology.png](https://i.postimg.cc/3JGwfxfW/Methodology.png)](https://postimg.cc/ZCTZC4Sh)
+
+<h2>
+   Equipment🧰
+</h2>
