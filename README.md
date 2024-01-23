@@ -13,7 +13,7 @@
    Equipment🧰
 </h2
   <p>
-      -stm32l1         - water pump
+      -stm32l1                 - water pump
   </p>
   <p>
       -flame sensor    - rubber tube
