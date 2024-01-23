@@ -12,15 +12,6 @@
 <h2>
    Equipment🧰
 </h2
-  <p>
-      -stm32l152       - water pump
-  </p>
-  <p>
-      -flame sensor    - rubber tube
-  </p>
-  <p>
-      -servo motor     - 7-segment   - speaker
-  </p>
 
 [![Screenshot-2024-01-20-095853.png](https://i.postimg.cc/c1PmmF6R/Screenshot-2024-01-20-095853.png)](https://postimg.cc/rzCxyC1s)
 
