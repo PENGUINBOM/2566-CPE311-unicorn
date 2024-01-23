@@ -11,7 +11,10 @@
 
 <h2>
    Equipment🧰
-</h2>
+</h2
+  -stm32l1         - water pump
+  -flame sensor    - rubber tube
+  -servo motor 
 
 [![Screenshot-2024-01-20-095853.png](https://i.postimg.cc/c1PmmF6R/Screenshot-2024-01-20-095853.png)](https://postimg.cc/rzCxyC1s)
 
