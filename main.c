@@ -10,25 +10,69 @@
 
 void SystemClock_Config(void);
 void GPIO_Config(void);
+void ltc4727js_config(void);
 
 int main(void)
 {
 	SystemClock_Config();
+	GPIO_Config();
+  ltc4727js_config();
 
-	LL_GPIO_InitTypeDef ltc4727_initstruct;
 	uint8_t i;
 	uint32_t segF [4] = {LL_GPIO_PIN_15 | LL_GPIO_PIN_2 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14,
 	LL_GPIO_PIN_10 | LL_GPIO_PIN_11,
 	LL_GPIO_PIN_2 | LL_GPIO_PIN_11 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15,
 	LL_GPIO_PIN_2 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13  | LL_GPIO_PIN_14 | LL_GPIO_PIN_15}; //FIRE
 
-	uint32_t segS [4] = {LL_GPIO_PIN_2 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15,
-	LL_GPIO_PIN_2 | LL_GPIO_PIN_14 | LL_GPIO_PIN_13,
-	LL_GPIO_PIN_2 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_10 | LL_GPIO_PIN_14,
-	LL_GPIO_PIN_15 | LL_GPIO_PIN_14 | LL_GPIO_PIN_13  | LL_GPIO_PIN_10 | LL_GPIO_PIN_2}; //STOP
-
 	uint32_t digit [4] ={LL_GPIO_PIN_0, LL_GPIO_PIN_1, LL_GPIO_PIN_2, LL_GPIO_PIN_3};
 
+	while (1){
+  int button_pressed = LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_8);
+   
+	if (button_pressed == 0) {
+		  LL_GPIO_SetOutputPin(GPIOB, LL_GPIO_PIN_6);
+	   for (i= 0; i < 4; ++i){
+		    LL_GPIO_ResetOutputPin (GPIOC, LL_GPIO_PIN_0 | LL_GPIO_PIN_1 | LL_GPIO_PIN_2 | LL_GPIO_PIN_3); //Write 0 to GPIOC port LL_GPIO_ResetOutputPin (GPIOB, LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL GPIO_PIN_11 | LL_GPIO_PIN_12 |
+		    LL_GPIO_ResetOutputPin (GPIOB, LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15); //Reset all segment
+		    LL_GPIO_SetOutputPin (GPIOB, segF[i]);
+		    LL_GPIO_SetOutputPin (GPIOC, digit[i]);
+		    LL_mDelay(0); //USE for DEBUG increase delay to see what's happenning when 7-seg is lit
+		  }
+	  }else{
+			LL_GPIO_ResetOutputPin(GPIOB, LL_GPIO_PIN_6);
+		}
+  }
+}
+
+ void GPIO_Config(void){
+	 
+	  // Declare struct for GPIO
+    LL_GPIO_InitTypeDef GPIO_InitStruct;
+
+	  // Enable GPIOB clock
+    LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
+	 
+	 // Enable GPIOB clock
+    LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
+	 
+	  // Config GPIOB using struct
+    GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
+    GPIO_InitStruct.Pin = LL_GPIO_PIN_4 | LL_GPIO_PIN_6 ;
+    GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+    GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+    GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_HIGH;
+    LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+	 
+	  // Config GPIOA using struct
+    GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pin = LL_GPIO_PIN_8;
+    GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+    LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+ }
+
+void ltc4727js_config(void){
+	LL_GPIO_InitTypeDef ltc4727_initstruct;
 	//configure ltc4727js
 	LL_AHB1_GRP1_EnableClock (LL_AHB1_GRP1_PERIPH_GPIOB);
 	LL_AHB1_GRP1_EnableClock (LL_AHB1_GRP1_PERIPH_GPIOC);
@@ -43,38 +87,7 @@ int main(void)
 	ltc4727_initstruct. Pin = LL_GPIO_PIN_0 | LL_GPIO_PIN_1 | LL_GPIO_PIN_2 | LL_GPIO_PIN_3; //Enable PC
 	LL_GPIO_Init(GPIOC, &ltc4727_initstruct);
 	
-	while (1){
-  int button_pressed = LL_GPIO_IsInputPinSet(GPIOB, LL_GPIO_PIN_4);
-   
-	if (button_pressed == 0) {
-	   for (i= 0; i < 4; ++i){
-		    LL_GPIO_ResetOutputPin (GPIOC, LL_GPIO_PIN_0 | LL_GPIO_PIN_1 | LL_GPIO_PIN_2 | LL_GPIO_PIN_3); //Write 0 to GPIOC port LL_GPIO_ResetOutputPin (GPIOB, LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL GPIO_PIN_11 | LL_GPIO_PIN_12 |
-		    LL_GPIO_ResetOutputPin (GPIOB, LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15); //Reset all segment
-		    LL_GPIO_SetOutputPin (GPIOB, segF[i]);
-		    LL_GPIO_SetOutputPin (GPIOC, digit[i]);
-		    LL_mDelay(0); //USE for DEBUG increase delay to see what's happenning when 7-seg is lit
-		  }
-	  }
-  }
 }
-
- void GPIO_Config(void){
-	  // Declare struct for GPIO
-    LL_GPIO_InitTypeDef GPIO_InitStruct;
-
-	  // Enable GPIOB clock
-    LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
-	 
-	  // Config GPIOB using struct
-    GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
-    GPIO_InitStruct.Pin = LL_GPIO_PIN_4 ;
-    GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
-    GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
-    GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_HIGH;
-    LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- }
-
-
 void SystemClock_Config(void)
 {
   /* Enable ACC64 access and set FLASH latency */
