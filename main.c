@@ -45,8 +45,10 @@ int main(void)
 	uint32_t digit [4] ={LL_GPIO_PIN_0, LL_GPIO_PIN_1, LL_GPIO_PIN_2};
   
 	while (1){
+	LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_9);
   int button_pressed = LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_8);
 	if (button_pressed == 0) {
+		LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_9);
 		  //speaker
 		  TIM_OC_Confignote(ARR_CALCULATE(A_4));
 			LL_mDelay(300);
@@ -78,16 +80,19 @@ int main(void)
 	 
 	  // Declare struct for GPIO
     LL_GPIO_InitTypeDef GPIO_InitStruct;
-	 
 	 // Enable GPIOB clock
     LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
 	 
 	  // Config GPIOA using struct
     GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
-    GPIO_InitStruct.Pin = LL_GPIO_PIN_8;
+    GPIO_InitStruct.Pin = LL_GPIO_PIN_8 ;
     GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
     LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
+	 
+	  GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
+    GPIO_InitStruct.Pin = LL_GPIO_PIN_9 ;
+    GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+    LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
  }
 
 void ltc4727js_config(void){
