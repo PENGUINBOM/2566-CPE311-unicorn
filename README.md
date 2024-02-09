@@ -1,5 +1,5 @@
 # 2566-CPE311-unicorn
-🔥Project Automatic_Fire_Gun🔥
+🔥Project Gun_Fire_extinguisher🔥
 
 <h2>
   <p> 
