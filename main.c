@@ -65,7 +65,7 @@ int main(void)
 		    LL_GPIO_ResetOutputPin (GPIOB, LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15); //Reset all segment
 		    LL_GPIO_SetOutputPin (GPIOB, segF[i]);
 		    LL_GPIO_SetOutputPin (GPIOC, digit[i]);
-		    LL_mDelay(0); //USE for DEBUG increase delay to see what's happenning when 7-seg is lit
+		    LL_mDelay(60); //USE for DEBUG increase delay to see what's happenning when 7-seg is lit
 		  }
 	  }else{
 			LL_GPIO_ResetOutputPin(GPIOB, LL_GPIO_PIN_7);
