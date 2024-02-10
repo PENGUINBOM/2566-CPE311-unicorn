@@ -13,7 +13,7 @@
    Equipment🧰
 </h2
 
-[![Screenshot-2024-01-20-095853.png](https://i.postimg.cc/c1PmmF6R/Screenshot-2024-01-20-095853.png)](https://postimg.cc/rzCxyC1s)
+[![Screenshot-2024-02-10-220213.png](https://i.postimg.cc/qvzHM5S8/Screenshot-2024-02-10-220213.png)](https://postimg.cc/87Q0Zt15)
 
 <h2>
   ⚡circuit⚡
