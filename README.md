@@ -19,4 +19,4 @@
   ⚡circuit⚡
 </h2>
 
-[![1706018042524.jpg](https://i.postimg.cc/QMfkmtZ1/1706018042524.jpg)](https://postimg.cc/HJ7ysTxk)
+[![p-25.jpg](https://i.postimg.cc/K8jHsHWG/p-25.jpg)](https://postimg.cc/Mnk5ndxN)
