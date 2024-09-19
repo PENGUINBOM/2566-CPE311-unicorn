@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                echo 'Checking out the code from GitHub...'
+                // This stage triggers when the pipeline reaches this point
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+                // Build actions are triggered here
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application...'
+                // Deployment is triggered here
+            }
+        }
+    }
+}
